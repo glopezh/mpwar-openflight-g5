@@ -2,17 +2,17 @@
 declare(strict_types=1);
 
 
-namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Users;
+namespace CodelyTv\Apps\OpenFlight\Backend\Controller\Login;
 
 
-use CodelyTv\OpenFlight\Users\Application\UserRegistration;
+use CodelyTv\OpenFlight\Login\Application\LoginUser;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class RegisterPutController
+final class LoginPutController
 {
-    public function __construct(private UserRegistration $userRegistration)
+    public function __construct(private LoginUser $loginUser)
     {
     }
 
@@ -20,11 +20,9 @@ final class RegisterPutController
     {
         try {
             //var_dump($request->request->getAlpha('username'));exit;
-            $this->userRegistration->__invoke(
+            $this->loginUser->__invoke(
                 $id,
                 $request->request->getAlpha('username'),
-                $request->request->getAlpha('name'),
-                $request->request->getAlpha('last_name'),
                 $request->request->get('password')
             );
             return new JsonResponse("OK", Response::HTTP_CREATED);
