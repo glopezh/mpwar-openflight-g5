@@ -7,7 +7,7 @@ namespace CodelyTv\OpenFlight\Login\Domain;
 use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 
-class User extends AggregateRoot
+class Login extends AggregateRoot
 {
     const pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/';
     private Uuid $id;
@@ -35,7 +35,7 @@ class User extends AggregateRoot
         return $this->password;
     }
 
-    public static function LoginUser(Uuid $id, string $username, string $password): User
+    public static function LoginUser(Uuid $id, string $username, string $password): Login
     {
         self::validateUserame($username);
         self::validatePassword($password);

@@ -6,7 +6,7 @@ namespace CodelyTv\OpenFlight\Login\Domain;
 
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 
-interface UserRepository
+interface LoginRepository
 {
-    public function Save(User $user): void;
+    public function Save(Login $login): void;
 }
