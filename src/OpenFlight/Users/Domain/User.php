@@ -84,4 +84,16 @@ class User extends AggregateRoot
             throw new InvalidPassword($password);
         }
     }
+
+    public static function LoginUser(string $username, string $password): void
+    {
+        if ($username = //el que esta en la base de datos)
+        {
+
+        }
+    }
 }
+
+//crear metodo login
+//rec password
+//met void

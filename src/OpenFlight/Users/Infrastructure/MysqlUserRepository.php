@@ -29,4 +29,8 @@ final class MysqlUserRepository implements UserRepository
         $statement->execute();
     }
 
+    public function Find(string $username): User
+    {
+        // TODO: Implement Find() method.
+    }
 }
