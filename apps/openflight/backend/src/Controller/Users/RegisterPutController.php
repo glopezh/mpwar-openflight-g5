@@ -19,7 +19,6 @@ final class RegisterPutController
     public function __invoke(string $id, Request $request): JsonResponse
     {
         try {
-            //var_dump($request->request->getAlpha('username'));exit;
             $this->userRegistration->__invoke(
                 $id,
                 $request->request->getAlpha('username'),

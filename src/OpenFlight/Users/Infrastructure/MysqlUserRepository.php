@@ -1,15 +1,14 @@
 <?php
 declare(strict_types=1);
 
-
 namespace CodelyTv\OpenFlight\Users\Infrastructure;
 
-
 use CodelyTv\OpenFlight\Users\Domain\User;
+use CodelyTv\OpenFlight\Users\Domain\UserDoesNotExists;
 use CodelyTv\OpenFlight\Users\Domain\UserRepository;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use CodelyTv\Shared\Infrastructure\Persistence\Mysql;
-use function Symfony\Component\String\u;
+use PDO;
 
 final class MysqlUserRepository implements UserRepository
 {
@@ -31,6 +30,13 @@ final class MysqlUserRepository implements UserRepository
 
     public function Find(string $username): User
     {
-        // TODO: Implement Find() method.
+        $sql = "SELECT * FROM user WHERE Username = '" . $username . "'";
+        $statement = $this->mysql->PDO()->prepare($sql);
+        //$statement->bindValue(':username', $username);
+        $statement->execute();
+        $resultUser = $statement->fetch(PDO::FETCH_ASSOC);
+        if (!$resultUser) throw new UserDoesNotExists();
+        $uuid = new Uuid($resultUser['Id']);
+        return new User($uuid, $resultUser['Username'], $resultUser['Name'], $resultUser['LastName'], $resultUser['Password']);
     }
 }
